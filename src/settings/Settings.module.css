@@ -1,0 +1,28 @@
+.containerSettings {
+    display: flex;
+    margin: 150px auto;
+    width: 250px;
+    height: 180px;
+    border: 3px solid #1dedff;
+    padding: 15px;
+    background-color: #282c34;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+button {
+    height: 35px;
+    width: 75px;
+    border: 2px solid #1dedff;
+    border-radius: 10px;
+}
+
+.red {
+    color: red;
+}
+h4 {
+    color: #1dedff;
+}
+

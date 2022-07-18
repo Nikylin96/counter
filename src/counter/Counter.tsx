@@ -1,31 +1,37 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from './Counter.module.css'
 
-const Counter = () => {
-    let [increm, setIncrem] = useState(0)
+type PropsType = {
+    increm: number
+    setIncrem: (value:number)=>void
+    maxValue: number
+    minValue:number
+    error:string
+}
 
-    function reset() {
-        return 0
+export const Counter = (props:PropsType) => {
+
+    const increment = () => {
+        props.setIncrem(props.increm+1)
+        localStorage.setItem('counterValue', JSON.stringify(props.increm+1))
     }
+
+    useEffect(()=> {
+        let valueAsString = localStorage.getItem('counterValue')
+        if (valueAsString) {
+            let newValue = JSON.parse(valueAsString)
+            props.setIncrem(newValue)
+        }
+    }, [])
 
     return (
         <div className={s.container}>
-            <div className={s.increm}><span className={increm === 5? s.red : ''}>{increm}</span></div>
+            <div className={s.increm}><span className={props.increm===props.maxValue ? s.red : ''}>{props.error ? props.error : props.increm}</span></div>
             <div className={s.buttonCountainer}>
-                <button disabled={increm===5} onClick={()=>{setIncrem(increm+1)}}>INC</button>
-                <button disabled={increm===0} onClick={()=>{setIncrem(reset)}}>RESET</button>
+                <button disabled={props.increm===props.maxValue} className={s.button} onClick={increment}>inc</button>
+                <button disabled={props.increm===props.minValue} className={s.button} onClick={()=>{props.setIncrem(props.minValue)}}>reset</button>
             </div>
+
         </div>
     );
 };
-
-export default Counter;
-
-// <div className={s.contur}>
-//     <span className={s.ishod}>{increm}</span>
-//     <div className={s.secondContur}>
-//         <button disabled={increm===5}
-//                 onClick={ ()=>{setIncrem(increm+1)}  } className={s.firstButton}>inc</button>
-//         <button disabled={increm === 0} onClick={()=> {setIncrem(reset)} } className={s.secondButton}>recet</button>
-//     </div>
-// </div>

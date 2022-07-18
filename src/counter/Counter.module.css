@@ -18,6 +18,9 @@ button {
     border: 2px solid #1dedff;
     border-radius: 10px;
 }
+button:hover {
+    color: #1dedff;
+}
 
 .increm {
     font-size: 50px;
@@ -28,6 +31,7 @@ button {
     padding-left: 50px;
     padding-right: 50px;
     margin-bottom: 25px;
+    font-weight: bold;
 }
 
 .red {
